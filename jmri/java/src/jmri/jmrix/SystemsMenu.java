@@ -83,6 +83,7 @@ public class SystemsMenu extends JMenu {
         add( new jmri.jmrix.lenz.swing.XNetMenu(null));
         addMenu("jmri.jmrix.xpa.XpaMenu");
         addMenu("jmri.jmrix.zimo.Mx1Menu");
+        addMenu("jmri.jmrix.lukeDCC.LukeDCCMenu");
         add(new javax.swing.JSeparator());
         addMenu("jmri.jmrix.direct.DirectMenu");
 
