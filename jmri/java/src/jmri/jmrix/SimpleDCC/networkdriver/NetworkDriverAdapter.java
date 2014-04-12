@@ -5,6 +5,7 @@ package jmri.jmrix.SimpleDCC.networkdriver;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import jmri.ThrottleManager;
 import jmri.jmrix.AbstractNetworkPortController;
 import jmri.jmrix.SimpleDCC.TrafficController;
 import jmri.jmrix.SystemConnectionMemo;
@@ -39,6 +40,9 @@ public class NetworkDriverAdapter extends AbstractNetworkPortController implemen
         // connect to the traffic controller
         TrafficController control = TrafficController.instance();
         control.connectPort(this);
+        
+        
+        jmri.InstanceManager.setThrottleManager(new jmri.jmrix.SimpleDCC.ThrottleManager());
 //        adaptermemo.setTrafficController(control);
 //        adaptermemo.configureManagers();
 //        adaptermemo.configureCommandStation();
