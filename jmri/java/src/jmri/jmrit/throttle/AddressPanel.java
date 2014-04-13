@@ -17,6 +17,7 @@ import jmri.ThrottleListener;
 import jmri.DccLocoAddress;
 import jmri.InstanceManager;
 import jmri.Programmer;
+import jmri.ThrottleManager;
 import jmri.jmrit.roster.*;
 import jmri.jmrit.DccLocoAddressSelector;
 import jmri.jmrit.roster.swing.RosterEntrySelectorPanel;
@@ -450,8 +451,10 @@ public class AddressPanel extends JInternalFrame implements ThrottleListener, Pr
 			l.notifyAddressChosen(currentAddress);
 		}
 
+               ThrottleManager t= InstanceManager.throttleManagerInstance();
+               DccLocoAddress a = getCurrentAddress();
     	boolean requestOK =
-    		InstanceManager.throttleManagerInstance().requestThrottle(getCurrentAddress(), rosterEntry, this);
+    		t.requestThrottle(a, rosterEntry, this);
     	if (!requestOK)
     		JOptionPane.showMessageDialog(mainPanel, Bundle.getMessage("AddressInUse"));
 	}

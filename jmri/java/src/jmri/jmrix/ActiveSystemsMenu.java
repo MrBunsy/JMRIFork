@@ -114,8 +114,8 @@ public class ActiveSystemsMenu extends JMenu {
         if (jmri.jmrix.zimo.ActiveFlag.isActive())
             m.add(getMenu("jmri.jmrix.zimo.Mx1Menu"));
 
-        if (jmri.jmrix.lukeDCC.ActiveFlag.isActive())
-            m.add(getMenu("jmri.jmrix.lukeDCC.LukeDCCMenu"));
+        if (jmri.jmrix.SimpleDCC.ActiveFlag.isActive())
+            m.add(getMenu("jmri.jmrix.SimpleDCC.SimpleDCCMenu"));
         
         if (jmri.jmrix.direct.ActiveFlag.isActive())
             m.add(getMenu("jmri.jmrix.direct.DirectMenu"));
@@ -172,8 +172,8 @@ public class ActiveSystemsMenu extends JMenu {
         if (jmri.jmrix.zimo.ActiveFlag.isActive())
             m.add(getMenu("jmri.jmrix.zimo.Mx1Menu"));
         
-        if (jmri.jmrix.lukeDCC.ActiveFlag.isActive())
-            m.add(getMenu("jmri.jmrix.lukeDCC.LukeDCCMenu"));
+        if (jmri.jmrix.SimpleDCC.ActiveFlag.isActive())
+            m.add(getMenu("jmri.jmrix.SimpleDCC.SimpleDCCMenu"));
         
         m.add(new javax.swing.JSeparator());
 

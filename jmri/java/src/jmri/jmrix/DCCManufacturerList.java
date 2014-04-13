@@ -48,6 +48,7 @@ public class DCCManufacturerList {
     public static final String ROCO = "Roco";
     public static final String SPROG = "SPROG DCC";
     public static final String SRCP = "SRCP";
+    public static final String SIMPLE = "SimpleDCC";
     public static final String TAMS = "Tams";
     public static final String TRACTRONICS = "TracTronics";
     public static final String UHLEN = "Uhlenbrock";
@@ -89,6 +90,7 @@ public class DCCManufacturerList {
           ROCO,
           SPROG,
           SRCP,
+          SIMPLE,
           TAMS,
           TRACTRONICS,
           UHLEN,
@@ -132,6 +134,7 @@ public class DCCManufacturerList {
         if(System.equals(ROCO)) { return new jmri.jmrix.lenz.LenzConnectionTypeList().getAvailableProtocolClasses(); }
         if(System.equals(SPROG)) { return new jmri.jmrix.sprog.SprogConnectionTypeList().getAvailableProtocolClasses();  }
         if(System.equals(SRCP)) { return new jmri.jmrix.srcp.SRCPConnectionTypeList().getAvailableProtocolClasses(); }
+        if(System.equals(SIMPLE)) { return new jmri.jmrix.SimpleDCC.SimpleDCCConnectionTypeList().getAvailableProtocolClasses(); }
         if(System.equals(TAMS)) { return new jmri.jmrix.tams.TamsConnectionTypeList().getAvailableProtocolClasses(); }
         if(System.equals(TRACTRONICS)) { return new jmri.jmrix.secsi.SerialConnectionTypeList().getAvailableProtocolClasses(); }
         if(System.equals(UHLEN)) { return new jmri.jmrix.loconet.uhlenbrock.UhlenbrockConnectionTypeList().getAvailableProtocolClasses();   }

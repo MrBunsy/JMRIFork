@@ -32,7 +32,7 @@ public class ConnectionConfig  extends jmri.jmrix.AbstractNetworkConnectionConfi
 
     protected void setInstance() {
         adapter = NetworkDriverAdapter.instance();
-        adapter.setPort(1234); // 4303 is assigned to SRCP by IANA
+        adapter.setPort(1234); // default port I chose 'randomly'
     }
 
     public boolean isPortAdvanced() {return false;}

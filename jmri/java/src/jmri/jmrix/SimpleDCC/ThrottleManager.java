@@ -51,7 +51,7 @@ public class ThrottleManager extends AbstractThrottleManager {
             return;
         }
         log.warn("requestThrottleSetup should preserve actual address object, not use ints");
-        currentThrottle = new Throttle(((DccLocoAddress) address).getNumber());
+        currentThrottle = new Throttle((DccLocoAddress)address);
         notifyThrottleKnown(currentThrottle, currentThrottle.getLocoAddress());
     }
 

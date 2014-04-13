@@ -66,25 +66,8 @@ public class TrafficController implements jmri.CommandStation {
      * @param repeats Number of times to repeat the transmission, but is ignored
      * in the current implementation
      */
-    @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = "SBSC_USE_STRINGBUFFER_CONCATENATION")
-    // Only used occasionally, so inefficient String processing not really a problem
-    // though it would be good to fix it if you're working in this area
     public void sendPacket(byte[] packet, int repeats) {
 
-//        if (repeats!=1) log.warn("Only single transmissions currently available");
-        // convert packet (in byte form) into bits
-//		int[] msgAsInt = OldMakePacket.createStream(packet);
-//
-//		if (msgAsInt[0] == 0) {
-//			// failed to make packet
-//			log.error("Failed to convert packet to transmitable form: "+java.util.Arrays.toString(packet));
-//			return;
-//		}
-//
-//		// have to recopy & reformat, as there's only a byte write in Java 1
-//		// note that msgAsInt has 0th byte containing length still
-//		byte[] msg = new byte[msgAsInt[0]];
-//		for (int i = 0; i<msg.length; i++) msg[i] = (byte) (msgAsInt[i+1]&0xFF);
         ByteBuffer msg = MakePacket.createByteBuffer(packet, repeats);
 
         // and stream the resulting byte array
