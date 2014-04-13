@@ -97,7 +97,7 @@ public class Throttle extends AbstractThrottle {
 //        if (value<0) value = 1;        // emergency stop
 
         byte[] result;
-
+//        this.speedStepMode = SpeedStepMode128;
         if (super.speedStepMode == SpeedStepMode128) {
             int value = (int) ((127 - 1) * speed);     // -1 for rescale to avoid estop
             if (value > 0) {

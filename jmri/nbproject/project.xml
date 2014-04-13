@@ -44,7 +44,7 @@
                 </action>
                 <action name="run">
                     <script>${ant.script}</script>
-                    <target>panelpro</target>
+                    <target>decoderpro</target>
                 </action>
                 <action name="profile">
                     <script>${ant.script}</script>
