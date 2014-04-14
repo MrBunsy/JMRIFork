@@ -24,35 +24,29 @@ public class ThrottleManager extends AbstractThrottleManager {
     /**
      * Constructor.
      */
-    public ThrottleManager() {
-        super();
-        if (mInstance != null) {
-            log.warn("Creating too many objects");
-        }
-        jmri.InstanceManager.setThrottleManager(this);
-        mInstance = this;
+    public ThrottleManager(SimpleDCCConnectionMemo memo) {
+        super(memo);
+//        if (mInstance != null) {
+//            log.warn("Creating too many objects");
+//        }
+////        jmri.InstanceManager.setThrottleManager(this);
+//        mInstance = this;
     }
 
-    static private ThrottleManager mInstance = null;
+//    static private ThrottleManager mInstance = null;
 
-    static public ThrottleManager instance() {
-        return mInstance;
-    }
+//    static public ThrottleManager instance() {
+//        return mInstance;
+//    }
 
-    Throttle currentThrottle = null;
+//    Throttle currentThrottle = null;
 
     /**
      * Create throttle data structures.
      */
     public void requestThrottleSetup(LocoAddress address, boolean control) {
-        if (currentThrottle != null) {
-            log.error("DCC direct cannot handle more than one throttle now");
-            failedThrottleRequest((DccLocoAddress) address, "DCC direct cannot handle more than one throttle " + address);
-            return;
-        }
-        log.warn("requestThrottleSetup should preserve actual address object, not use ints");
-        currentThrottle = new Throttle((DccLocoAddress)address);
-        notifyThrottleKnown(currentThrottle, currentThrottle.getLocoAddress());
+        log.debug("new SimpleDccThrottle for "+address);
+        notifyThrottleKnown(new Throttle((SimpleDCCConnectionMemo)adapterMemo, (DccLocoAddress)address), address);
     }
 
     public boolean addressTypeUnique() {
@@ -73,7 +67,7 @@ public class ThrottleManager extends AbstractThrottleManager {
      */
     public boolean disposeThrottle(jmri.DccThrottle t, jmri.ThrottleListener l) {
         if (super.disposeThrottle(t, l)) {
-            currentThrottle = null;
+//            currentThrottle = null;
             return true;
         }
         return false;

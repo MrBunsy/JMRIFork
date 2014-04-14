@@ -5,7 +5,7 @@ package jmri.jmrix.SimpleDCC.serial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jmri.jmrix.SimpleDCC.PortController;
-import jmri.jmrix.SimpleDCC.TrafficController;
+import jmri.jmrix.SimpleDCC.CommandStation;
 import jmri.util.SystemType;
 
 import java.io.DataInputStream;
@@ -241,11 +241,11 @@ public class SerialDriverAdapter extends PortController  implements jmri.jmrix.S
      */
     public void configure() {
         // connect to the traffic controller
-        TrafficController.instance().connectPort(this);
+        CommandStation.instance().connectPort(this);
 
 		// initialize any managers this protocol provides
 
-        jmri.InstanceManager.setCommandStation(TrafficController.instance());
+        jmri.InstanceManager.setCommandStation(CommandStation.instance());
 
 		// mention as available
         jmri.jmrix.SimpleDCC.ActiveFlag.setActive();

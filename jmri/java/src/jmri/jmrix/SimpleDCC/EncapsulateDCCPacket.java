@@ -12,7 +12,7 @@ import java.nio.ByteBuffer;
  *
  * @author Luke
  */
-public class MakePacket {
+public class EncapsulateDCCPacket {
     
     //TODO integrate with PiDCC
     public static int SYNC_BYTES = 4, MESSAGE_SIZE = (10 + 4), MAX_PRIORITY=255, CUSTOM_PACKET = 4,

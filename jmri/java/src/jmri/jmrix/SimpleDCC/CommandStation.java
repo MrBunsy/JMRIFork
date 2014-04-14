@@ -29,9 +29,9 @@ import jmri.jmrix.AbstractNetworkPortController;
  * @author	Bob Jacobsen Copyright (C) 2001
  * @version	$Revision: 22821 $
  */
-public class TrafficController implements jmri.CommandStation {
+public class CommandStation implements jmri.CommandStation {
 
-    public TrafficController() {
+    public CommandStation() {
         super();
     }
 
@@ -40,17 +40,17 @@ public class TrafficController implements jmri.CommandStation {
      *
      * @return The registered instance for general use, if need be creating one.
      */
-    static public TrafficController instance() {
+    static public CommandStation instance() {
         if (self == null) {
             if (log.isDebugEnabled()) {
                 log.debug("creating a new TrafficController object");
             }
-            self = new TrafficController();
+            self = new CommandStation();
         }
         return self;
     }
 
-    static TrafficController self = null;
+    static CommandStation self = null;
 
     @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = "ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD",
             justification = "temporary until mult-system; only set at startup")
@@ -68,7 +68,7 @@ public class TrafficController implements jmri.CommandStation {
      */
     public void sendPacket(byte[] packet, int repeats) {
 
-        ByteBuffer msg = MakePacket.createByteBuffer(packet, repeats);
+        ByteBuffer msg = EncapsulateDCCPacket.createByteBuffer(packet, repeats);
 
         // and stream the resulting byte array
         try {
@@ -145,7 +145,7 @@ public class TrafficController implements jmri.CommandStation {
         return "N";
     }
 
-    static Logger log = LoggerFactory.getLogger(TrafficController.class.getName());
+    static Logger log = LoggerFactory.getLogger(CommandStation.class.getName());
 }
 
 
