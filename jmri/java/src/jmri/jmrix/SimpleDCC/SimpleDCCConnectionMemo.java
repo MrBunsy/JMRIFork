@@ -42,8 +42,9 @@ public class SimpleDCCConnectionMemo extends jmri.jmrix.SystemConnectionMemo {
 //        jmri.InstanceManager.setProgrammerManager(programManager);
         // Install a debug throttle manager
         throttleManager = new ThrottleManager(this);
-        jmri.InstanceManager.setThrottleManager(throttleManager
-        );
+        jmri.InstanceManager.setThrottleManager(throttleManager);
+        
+        jmri.InstanceManager.setCommandStation(commandStation);
 
     }
 
