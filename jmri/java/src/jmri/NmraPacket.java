@@ -525,6 +525,36 @@ public class NmraPacket {
         }
         return retVal;
     }
+    
+    public static byte[] progDirectModeSetByte(int cvNum, int data ){
+        if (log.isDebugEnabled()) log.debug("progwrite cv:"+cvNum+" = "+data);
+
+
+        if (data<0 || data>255) {
+            log.error("invalid data "+data);
+            return null;
+        }
+        if (cvNum<1 || cvNum>1024) {
+            log.error("invalid CV number "+cvNum);
+            return null;
+        }
+
+        // end sanity checks, format output
+        byte[] retVal;
+        int arg1 = 0x7c + (((cvNum-1)>>8)&0x03);
+        int arg2 = (cvNum-1)&0xFF;
+        int arg3 = data&0xFF;
+
+
+        ///no address is used, this is for programming mode
+        retVal = new byte[4];
+        retVal[0] = (byte) arg1;
+        retVal[1] = (byte) arg2;
+        retVal[2] = (byte) arg3;
+        retVal[3] = (byte) (retVal[0]^retVal[1]^retVal[2]);
+
+        return retVal;
+    }
 
     public static byte[] speedStep128Packet(int address, boolean longAddr, int speed, boolean fwd ) {
         if (log.isDebugEnabled()) log.debug("128 step packet "+address+" "+speed);

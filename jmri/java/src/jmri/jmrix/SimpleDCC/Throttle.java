@@ -19,12 +19,14 @@ import jmri.jmrix.AbstractThrottle;
  */
 public class Throttle extends AbstractThrottle {
 
+    private CommandStation commandStation;
+    
     /**
      * Constructor.
      */
     public Throttle(SimpleDCCConnectionMemo memo,DccLocoAddress address) {
         super(memo);
-
+        this.commandStation=memo.getCommandStation();
         // cache settings.
         this.speedSetting = 0;
         this.f0 = false;
@@ -55,7 +57,8 @@ public class Throttle extends AbstractThrottle {
         byte[] result = jmri.NmraPacket.function0Through4Packet(address.getNumber(), address.isLongAddress(),
                 getF0(), getF1(), getF2(), getF3(), getF4());
 
-        CommandStation.instance().sendPacket(result, 1);
+        commandStation.sendPacket(result, 1);
+        
     }
 
     /**
@@ -66,7 +69,7 @@ public class Throttle extends AbstractThrottle {
         byte[] result = jmri.NmraPacket.function5Through8Packet(address.getNumber(), address.isLongAddress(),
                 getF5(), getF6(), getF7(), getF8());
 
-        CommandStation.instance().sendPacket(result, 1);
+        commandStation.sendPacket(result, 1);
     }
 
     /**
@@ -77,7 +80,7 @@ public class Throttle extends AbstractThrottle {
         byte[] result = jmri.NmraPacket.function9Through12Packet(address.getNumber(), address.isLongAddress(),
                 getF9(), getF10(), getF11(), getF12());
 
-        CommandStation.instance().sendPacket(result, 1);
+        commandStation.sendPacket(result, 1);
     }
 
     /**
@@ -156,7 +159,7 @@ public class Throttle extends AbstractThrottle {
 //            m.setElement(i++, step.charAt(j));
 //        }
         
-        CommandStation.instance().sendPacket(result, 1);
+        commandStation.sendPacket(result, 1);
         
         if (oldSpeed != this.speedSetting) {
             notifyPropertyChangeListener("SpeedSetting", oldSpeed, this.speedSetting);
