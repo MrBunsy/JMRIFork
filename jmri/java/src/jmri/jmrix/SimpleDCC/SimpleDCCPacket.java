@@ -34,6 +34,8 @@ public class SimpleDCCPacket {
             //System.out.println("pad");
             bb.put((byte) 0x00);
         }
+        
+        bb.flip();
     }
 
     public static ByteBuffer createProgrammeDirectByte(int cv, int newValue) {
@@ -48,12 +50,19 @@ public class SimpleDCCPacket {
         bb.put((byte) 0);
 
         //cv (uint16)
-        bb.putChar((char) cv);
+        //bb.putChar((char) cv);
+        //lowest byte
+        bb.put((byte)(cv & 0xff));
+        //highest byte
+        bb.put((byte)((cv >> 8) & 0xff));
+        
         //new value (byte)
         bb.put((byte) newValue);
 
         addFooter(bb);
-
+        
+        
+        
         return bb;
     }
 
@@ -95,7 +104,8 @@ public class SimpleDCCPacket {
         //repeat
         bb.put((byte) (repeats & 0xff));
 
-        bb.flip();
+//        bb.flip();
+        addFooter(bb);
 
         return bb;
     }

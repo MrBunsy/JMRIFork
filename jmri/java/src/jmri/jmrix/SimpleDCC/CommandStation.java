@@ -59,21 +59,13 @@ public class CommandStation implements jmri.CommandStation {
     }
 
     public void programmeCV(int cv, int newValue){
+        ByteBuffer msg = SimpleDCCPacket.createProgrammeDirectByte(cv, newValue);
         
+        sendByteBuffer(msg);
     }
     
-    /**
-     * Send a specific packet to the rails.
-     *
-     * @param packet Byte array representing the packet, including the
-     * error-correction byte. Must not be null.
-     * @param repeats Number of times to repeat the transmission, but is ignored
-     * in the current implementation
-     */
-    public void sendPacket(byte[] packet, int repeats) {
-
-        ByteBuffer msg = SimpleDCCPacket.createFromDCCPacket(packet, repeats);
-
+    private void sendByteBuffer(ByteBuffer msg){
+        
         // and stream the resulting byte array
         try {
             if (ostream != null) {
@@ -96,6 +88,21 @@ public class CommandStation implements jmri.CommandStation {
         } catch (Exception e) {
             log.warn("sendMessage: Exception: " + e.toString());
         }
+    }
+    
+    /**
+     * Send a specific packet to the rails.
+     *
+     * @param packet Byte array representing the packet, including the
+     * error-correction byte. Must not be null.
+     * @param repeats Number of times to repeat the transmission, but is ignored
+     * in the current implementation
+     */
+    public void sendPacket(byte[] packet, int repeats) {
+
+        ByteBuffer msg = SimpleDCCPacket.createFromDCCPacket(packet, repeats);
+        
+        sendByteBuffer(msg);
 
     }
 

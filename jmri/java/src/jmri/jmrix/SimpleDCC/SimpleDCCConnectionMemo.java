@@ -3,6 +3,7 @@ package jmri.jmrix.SimpleDCC;
 
 import jmri.InstanceManager;
 import java.util.ResourceBundle;
+import jmri.managers.DefaultProgrammerManager;
 
 /**
  * Lightweight class to denote that a system is active, and provide general
@@ -44,6 +45,9 @@ public class SimpleDCCConnectionMemo extends jmri.jmrix.SystemConnectionMemo {
         throttleManager = new ThrottleManager(this);
         jmri.InstanceManager.setThrottleManager(throttleManager);
         
+        programManager=(jmri.ProgrammerManager)(new DefaultProgrammerManager(new SimpleDCCProgrammer(this), this));
+        
+        jmri.InstanceManager.setProgrammerManager(programManager);
         jmri.InstanceManager.setCommandStation(commandStation);
 
     }
@@ -52,7 +56,7 @@ public class SimpleDCCConnectionMemo extends jmri.jmrix.SystemConnectionMemo {
     private jmri.TurnoutManager turnoutManager;
     private ThrottleManager throttleManager;
     private jmri.managers.DefaultPowerManager powerManager;
-    private jmri.progdebugger.DebugProgrammerManager programManager;
+    private jmri.ProgrammerManager programManager;
     private CommandStation commandStation;
 
     public jmri.TurnoutManager getTurnoutManager() {
@@ -71,7 +75,7 @@ public class SimpleDCCConnectionMemo extends jmri.jmrix.SystemConnectionMemo {
         return powerManager;
     }
 
-    public jmri.progdebugger.DebugProgrammerManager getProgrammerManager() {
+    public jmri.ProgrammerManager getProgrammerManager() {
         return programManager;
     }
 

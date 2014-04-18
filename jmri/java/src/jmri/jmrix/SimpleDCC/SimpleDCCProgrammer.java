@@ -8,6 +8,7 @@ import jmri.jmrix.AbstractProgrammer;
 import java.util.Vector;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import jmri.ProgListener;
 
 /**
  * Implements the jmri.Programmer interface via commands for the EasyDcc
@@ -32,8 +33,10 @@ public class SimpleDCCProgrammer extends AbstractProgrammer {
     /**
      * Cannot read yet
      */
-    public boolean getCanRead() { return false; }
-    
+    public boolean getCanRead() {
+        return false;
+    }
+
     /**
      * Switch to a new programming mode. Note that EasyDCC can only do register
      * and page mode. If you attempt to switch to any others, the new mode will
@@ -116,9 +119,10 @@ public class SimpleDCCProgrammer extends AbstractProgrammer {
 //        
 //        //would probably be easier if I actually re-use my own "programme a CV" command, than faff about trying to get this end to do DCC
 //        memo.getCommandStation().sendPacket(result, 1);
-        
-        
+        memo.getCommandStation().programmeCV(CV, val);
 
+        //TODO listen to reply (eg "programmer switch not toggled"
+        notifyProgListenerEnd(0, ProgListener.OK);
     }
 
     public synchronized void confirmCV(int CV, int val, jmri.ProgListener p) throws jmri.ProgrammerException {
@@ -190,7 +194,6 @@ public class SimpleDCCProgrammer extends AbstractProgrammer {
 //    void cleanup() {
 //        controller().sendEasyDccMessage(EasyDccMessage.getExitProgMode(), this);
 //    }
-
     // internal method to notify of the final result
     protected void notifyProgListenerEnd(int value, int status) {
         if (log.isDebugEnabled()) {
