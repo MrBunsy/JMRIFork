@@ -111,19 +111,21 @@ public class SimpleDCCProgrammer extends AbstractProgrammer {
         _val = val;
         _cv = CV;
 
-        byte[] result = jmri.NmraPacket.progDirectModeSetByte(CV, val);
-        //sooo, I think traffic manager would be used to send a message saying "enter programming mode"
+//        byte[] result = jmri.NmraPacket.progDirectModeSetByte(CV, val);
+//        //sooo, I think traffic manager would be used to send a message saying "enter programming mode"
+//        
+//        //would probably be easier if I actually re-use my own "programme a CV" command, than faff about trying to get this end to do DCC
+//        memo.getCommandStation().sendPacket(result, 1);
         
-        //would probably be easier if I actually re-use my own "programme a CV" command, than faff about trying to get this end to do DCC
-        memo.getCommandStation().sendPacket(result, 1);
+        
 
     }
-//
-//    public synchronized void confirmCV(int CV, int val, jmri.ProgListener p) throws jmri.ProgrammerException {
-//        readCV(CV, p);
-//    }
 
-//    public synchronized void readCV(int CV, jmri.ProgListener p) throws jmri.ProgrammerException {
+    public synchronized void confirmCV(int CV, int val, jmri.ProgListener p) throws jmri.ProgrammerException {
+        readCV(CV, p);
+    }
+
+    public synchronized void readCV(int CV, jmri.ProgListener p) throws jmri.ProgrammerException {
 //        if (log.isDebugEnabled()) {
 //            log.debug("readCV " + CV + " listens " + p);
 //        }
@@ -143,8 +145,8 @@ public class SimpleDCCProgrammer extends AbstractProgrammer {
 //            progState = NOTPROGRAMMING;
 //            throw e;
 //        }
-//
-//    }
+
+    }
 
     private jmri.ProgListener _usingProgrammer = null;
 

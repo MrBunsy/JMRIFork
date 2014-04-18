@@ -58,6 +58,10 @@ public class CommandStation implements jmri.CommandStation {
         self = this;
     }
 
+    public void programmeCV(int cv, int newValue){
+        
+    }
+    
     /**
      * Send a specific packet to the rails.
      *
@@ -68,7 +72,7 @@ public class CommandStation implements jmri.CommandStation {
      */
     public void sendPacket(byte[] packet, int repeats) {
 
-        ByteBuffer msg = EncapsulateDCCPacket.createByteBuffer(packet, repeats);
+        ByteBuffer msg = SimpleDCCPacket.createFromDCCPacket(packet, repeats);
 
         // and stream the resulting byte array
         try {
