@@ -32,7 +32,7 @@
             <ide-actions>
                 <action name="build">
                     <script>${ant.script}</script>
-                    <target>debug</target>
+                    <target>compile</target>
                 </action>
                 <action name="clean">
                     <script>${ant.script}</script>
@@ -44,7 +44,7 @@
                 </action>
                 <action name="run">
                     <script>${ant.script}</script>
-                    <target>decoderpro</target>
+                    <target>jmridemo</target>
                 </action>
                 <action name="profile">
                     <script>${ant.script}</script>
@@ -57,7 +57,7 @@
                 <action name="rebuild">
                     <script>${ant.script}</script>
                     <target>clean</target>
-                    <target>debug</target>
+                    <target>compile</target>
                 </action>
                 <action name="compile.single">
                     <script>nbproject/ide-file-targets.xml</script>
@@ -159,6 +159,11 @@
                         <script>${ant.script}</script>
                         <label>Make Jar File</label>
                         <target>jar</target>
+                    </action>
+                    <action>
+                        <script>${ant.script}</script>
+                        <label>Run Demo</label>
+                        <target>jmridemo</target>
                     </action>
                 </context-menu>
             </view>
