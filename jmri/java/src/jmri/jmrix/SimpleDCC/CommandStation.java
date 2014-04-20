@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
+import jmri.NmraPacket;
 import jmri.jmrix.AbstractNetworkPortController;
 
 /**
@@ -60,6 +61,13 @@ public class CommandStation implements jmri.CommandStation {
 
     public void programmeCV(int cv, int newValue){
         ByteBuffer msg = SimpleDCCPacket.createProgrammeDirectByte(cv, newValue);
+        
+        sendByteBuffer(msg);
+    }
+    
+    public void programmeCVOpsMode(int address, boolean longAddress, int cv, int newValue){
+        byte[] packet = NmraPacket.opsCvWriteByte(address, longAddress, cv, newValue );
+        ByteBuffer msg = SimpleDCCPacket.createFromDCCPacket(packet, newValue);
         
         sendByteBuffer(msg);
     }
