@@ -59,21 +59,27 @@ public class CommandStation implements jmri.CommandStation {
         self = this;
     }
 
-    public void programmeCV(int cv, int newValue){
+    public void programmeCV(int cv, int newValue) {
         ByteBuffer msg = SimpleDCCPacket.createProgrammeDirectByte(cv, newValue);
-        
+
         sendByteBuffer(msg);
     }
-    
-    public void programmeCVOpsMode(int address, boolean longAddress, int cv, int newValue){
-        byte[] packet = NmraPacket.opsCvWriteByte(address, longAddress, cv, newValue );
+
+    public void programmeAddress(int newAddress) {
+        ByteBuffer msg = SimpleDCCPacket.createProgrammeAddress(newAddress);
+
+        sendByteBuffer(msg);
+    }
+
+    public void programmeCVOpsMode(int address, boolean longAddress, int cv, int newValue) {
+        byte[] packet = NmraPacket.opsCvWriteByte(address, longAddress, cv, newValue);
         ByteBuffer msg = SimpleDCCPacket.createFromDCCPacket(packet, newValue);
-        
+
         sendByteBuffer(msg);
     }
-    
-    private void sendByteBuffer(ByteBuffer msg){
-        
+
+    private void sendByteBuffer(ByteBuffer msg) {
+
         // and stream the resulting byte array
         try {
             if (ostream != null) {
@@ -97,7 +103,7 @@ public class CommandStation implements jmri.CommandStation {
             log.warn("sendMessage: Exception: " + e.toString());
         }
     }
-    
+
     /**
      * Send a specific packet to the rails.
      *
@@ -109,7 +115,7 @@ public class CommandStation implements jmri.CommandStation {
     public void sendPacket(byte[] packet, int repeats) {
 
         ByteBuffer msg = SimpleDCCPacket.createFromDCCPacket(packet, repeats);
-        
+
         sendByteBuffer(msg);
 
     }

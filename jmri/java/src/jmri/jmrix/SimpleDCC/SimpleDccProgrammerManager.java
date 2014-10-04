@@ -27,11 +27,11 @@ public class SimpleDccProgrammerManager  extends DefaultProgrammerManager {
      * Works with command station to provide Ops Mode, so say it works
      * @return true
      */
-    public boolean isAddressedModePossible() {return true;}
+    public boolean isAddressedModePossible() {return false;}
 
-    public Programmer getAddressedProgrammer(boolean pLongAddress, int pAddress) {
-        return new EasyDccOpsModeProgrammer(pAddress, pLongAddress);
-    }
+//    public Programmer getAddressedProgrammer(boolean pLongAddress, int pAddress) {
+//        return new EasyDccOpsModeProgrammer(pAddress, pLongAddress);
+//    }
 
     public Programmer reserveAddressedProgrammer(boolean pLongAddress, int pAddress) {
         return null;

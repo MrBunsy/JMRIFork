@@ -51,7 +51,7 @@ public class SimpleDCCProgrammer extends AbstractProgrammer {
             notifyPropertyChange("Mode", _mode, mode);
             _mode = mode;
         }
-        if (_mode != Programmer.DIRECTBITMODE) {
+        if (!(_mode == Programmer.DIRECTBITMODE || _mode == Programmer.ADDRESSMODE )) {
             // attempt to switch to unsupported mode, switch back to previous
             _mode = oldMode;
             notifyPropertyChange("Mode", mode, _mode);
@@ -65,7 +65,7 @@ public class SimpleDCCProgrammer extends AbstractProgrammer {
      * @return True if paged or register mode
      */
     public boolean hasMode(int mode) {
-        if (mode == Programmer.DIRECTBYTEMODE) {
+        if (mode == Programmer.DIRECTBYTEMODE || mode == Programmer.ADDRESSMODE) {
             log.debug("hasMode request on mode " + mode + " returns true");
             return true;
         }
@@ -107,19 +107,30 @@ public class SimpleDCCProgrammer extends AbstractProgrammer {
         if (log.isDebugEnabled()) {
             log.debug("writeCV " + CV + " listens " + p);
         }
-        useProgrammer(p);
+        
+         useProgrammer(p);
         _progRead = false;
         // set commandPending state
         progState = COMMANDSENT;
         _val = val;
         _cv = CV;
+        
+        switch(_mode){
+            case Programmer.ADDRESSMODE:
+                memo.getCommandStation().programmeAddress(val);
+                break;
+            case Programmer.DIRECTBYTEMODE:
+                memo.getCommandStation().programmeCV(CV, val);
+                break;
+        }
+       
 
 //        byte[] result = jmri.NmraPacket.progDirectModeSetByte(CV, val);
 //        //sooo, I think traffic manager would be used to send a message saying "enter programming mode"
 //        
 //        //would probably be easier if I actually re-use my own "programme a CV" command, than faff about trying to get this end to do DCC
 //        memo.getCommandStation().sendPacket(result, 1);
-        memo.getCommandStation().programmeCV(CV, val);
+        
 
         //TODO listen to reply (eg "programmer switch not toggled"
         notifyProgListenerEnd(0, ProgListener.OK);

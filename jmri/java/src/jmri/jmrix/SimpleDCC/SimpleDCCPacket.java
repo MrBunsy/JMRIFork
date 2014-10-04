@@ -15,7 +15,7 @@ public class SimpleDCCPacket {
 
     //TODO integrate with PiDCC
     public static int SYNC_BYTES = 4, MESSAGE_SIZE = (10 + 4), MAX_PRIORITY = 255, OPERATIONS_MODE = 1, PROG_DIRECT_BYTE = 0,
-            MAX_DATA_BYTES = 6;//note one more than on AVR because this includes address
+            MAX_DATA_BYTES = 6, PROG_ADDRESS = 2;//note one more than on AVR because this includes address
 
     private static ByteBuffer createHeader() {
         ByteBuffer bb = ByteBuffer.allocate(MESSAGE_SIZE);
@@ -62,6 +62,29 @@ public class SimpleDCCPacket {
         addFooter(bb);
         
         
+        
+        return bb;
+    }
+    
+    /**
+     * For programming in address-only mode (need this for my n-gauge bachmann decoders)
+     * @param newAddress
+     * @return 
+     */
+    public static ByteBuffer createProgrammeAddress(int newAddress) {
+        ByteBuffer bb = createHeader();
+
+        //message type byte
+        bb.put((byte) (PROG_ADDRESS & 0xff));
+
+        //priority
+        bb.put((byte) 255);
+        //address
+        bb.put((byte) 0);
+
+        bb.put((byte) (newAddress & 0xff));
+
+        addFooter(bb);
         
         return bb;
     }
