@@ -40,6 +40,7 @@ public class DCCManufacturerList {
     public static final String OAK = "Oak Tree Systems";
     public static final String OPENLCB = "OpenLCB";
     public static final String OTHER = "Others";
+    public static final String PIPOINTS = "Pi Points";
     public static final String POWERLINE = "Powerline";
     public static final String PROTRAK = "Protrak";
     public static final String QSI = "QSI Solutions";
@@ -83,6 +84,7 @@ public class DCCManufacturerList {
           OAK,
           OPENLCB,
           OTHER,
+          PIPOINTS,
           POWERLINE,
           PROTRAK,
           QSI,
@@ -127,6 +129,7 @@ public class DCCManufacturerList {
         if(System.equals(NCE)) { return new jmri.jmrix.nce.NceConnectionTypeList().getAvailableProtocolClasses();   }
         if(System.equals(OAK)) { return new jmri.jmrix.oaktree.SerialConnectionTypeList().getAvailableProtocolClasses(); }
         if(System.equals(OPENLCB)) { return new jmri.jmrix.openlcb.OlcbConnectionTypeList().getAvailableProtocolClasses();  }
+        if(System.equals(PIPOINTS)) { return new jmri.jmrix.PiPoints.PiPointsConnectionTypeList().getAvailableProtocolClasses();}
         if(System.equals(POWERLINE)) { return new jmri.jmrix.powerline.SerialConnectionTypeList().getAvailableProtocolClasses(); }
         if(System.equals(PROTRAK)) { return new jmri.jmrix.grapevine.SerialConnectionTypeList().getAvailableProtocolClasses(); }
         if(System.equals(QSI)) { return new jmri.jmrix.qsi.QSIConnectionTypeList().getAvailableProtocolClasses(); }

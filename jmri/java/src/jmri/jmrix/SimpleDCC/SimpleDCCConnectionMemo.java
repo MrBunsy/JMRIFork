@@ -18,7 +18,7 @@ import jmri.managers.DefaultProgrammerManager;
 public class SimpleDCCConnectionMemo extends jmri.jmrix.SystemConnectionMemo {
 
     public SimpleDCCConnectionMemo() {
-        super("I", "Internal");
+        super("SIM", "SimpleDCC");
         InstanceManager.store(this, SimpleDCCConnectionMemo.class); // also register as specific type
         register();
     }
@@ -52,20 +52,20 @@ public class SimpleDCCConnectionMemo extends jmri.jmrix.SystemConnectionMemo {
 
     }
 
-    private jmri.SensorManager sensorManager;
-    private jmri.TurnoutManager turnoutManager;
+//    private jmri.SensorManager sensorManager;
+//    private jmri.TurnoutManager turnoutManager;
     private ThrottleManager throttleManager;
     private jmri.managers.DefaultPowerManager powerManager;
     private jmri.ProgrammerManager programManager;
     private CommandStation commandStation;
 
-    public jmri.TurnoutManager getTurnoutManager() {
-        return turnoutManager;
-    }
+//    public jmri.TurnoutManager getTurnoutManager() {
+//        return turnoutManager;
+//    }
 
-    public jmri.SensorManager getSensorManager() {
-        return sensorManager;
-    }
+//    public jmri.SensorManager getSensorManager() {
+//        return sensorManager;
+//    }
 
     public ThrottleManager getThrottleManager() {
         return throttleManager;
@@ -100,12 +100,12 @@ public class SimpleDCCConnectionMemo extends jmri.jmrix.SystemConnectionMemo {
         if (type.equals(jmri.PowerManager.class)) {
             return true;
         }
-        if (type.equals(jmri.SensorManager.class)) {
-            return true;
-        }
-        if (type.equals(jmri.TurnoutManager.class)) {
-            return true;
-        }
+//        if (type.equals(jmri.SensorManager.class)) {
+//            return true;
+//        }
+//        if (type.equals(jmri.TurnoutManager.class)) {
+//            return true;
+//        }
         return false; // nothing, by default
     }
 
@@ -124,31 +124,32 @@ public class SimpleDCCConnectionMemo extends jmri.jmrix.SystemConnectionMemo {
         if (T.equals(jmri.PowerManager.class)) {
             return (T) getPowerManager();
         }
-        if (T.equals(jmri.SensorManager.class)) {
-            return (T) getSensorManager();
-        }
-        if (T.equals(jmri.TurnoutManager.class)) {
-            return (T) getTurnoutManager();
-        }
+//        if (T.equals(jmri.SensorManager.class)) {
+//            return (T) getSensorManager();
+//        }
+//        if (T.equals(jmri.TurnoutManager.class)) {
+//            return (T) getTurnoutManager();
+//        }
         return null; // nothing, by default
     }
 
+    @Override
     protected ResourceBundle getActionModelResourceBundle() {
         //No actions to add at start up
         return null;
     }
 
-    public void dispose() {
-        if (sensorManager != null) {
-            sensorManager.dispose();
-            sensorManager = null;
-        }
-        if (turnoutManager != null) {
-            turnoutManager.dispose();
-            turnoutManager = null;
-        }
-        super.dispose();
-    }
+//    public void dispose() {
+//        if (sensorManager != null) {
+//            sensorManager.dispose();
+//            sensorManager = null;
+//        }
+//        if (turnoutManager != null) {
+//            turnoutManager.dispose();
+//            turnoutManager = null;
+//        }
+//        super.dispose();
+//    }
 }
 
 

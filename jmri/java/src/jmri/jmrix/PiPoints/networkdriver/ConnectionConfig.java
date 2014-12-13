@@ -1,10 +1,11 @@
 // ConnectionConfig.java
 
-package jmri.jmrix.SimpleDCC.networkdriver;
+package jmri.jmrix.PiPoints.networkdriver;
+
 
 
 /**
- * Definition of objects to handle configuring an EasyDCC layout connection
+ * Definition of objects to handle configuring a Pi Points connection
  * via a NetworkDriverAdapter object.
  *
  * @author      Bob Jacobsen   Copyright (C) 2001, 2003
@@ -30,7 +31,7 @@ public class ConnectionConfig  extends jmri.jmrix.AbstractNetworkConnectionConfi
 
     protected void setInstance() {
         adapter = NetworkDriverAdapter.instance();
-        adapter.setPort(1234); // default port I chose 'randomly'
+        adapter.setPort(1235); // default port I chose 'randomly'
     }
 
     public boolean isPortAdvanced() {return false;}
